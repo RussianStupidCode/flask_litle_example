@@ -20,6 +20,14 @@ class User(db.Model, BaseModelMixin):
             "email": self.email
         }
 
+    def update(self, attrs: dict):
+        for key, value in attrs.items():
+            if key == "password":
+                self.set_password(value)
+            else:
+                setattr(self, key, value)
+        self.commit()
+
     def set_password(self, raw_password: str):
         raw_password = f'{raw_password}{config.SALT}'
         self.password = hashlib.md5(raw_password.encode()).hexdigest()
@@ -27,3 +35,4 @@ class User(db.Model, BaseModelMixin):
     def check_password(self, raw_password: str):
         raw_password = f'{raw_password}{config.SALT}'
         return self.password == hashlib.md5(raw_password.encode()).hexdigest()
+

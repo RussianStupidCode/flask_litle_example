@@ -2,6 +2,7 @@ from flask import Flask
 from db import config
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.engine import URL
+from flask_httpauth import HTTPBasicAuth
 
 flask_app = Flask(__name__)
 if config.IS_DEBUG:
@@ -9,4 +10,5 @@ if config.IS_DEBUG:
 else:
     flask_app.config.from_mapping(SQLALCHEMY_DATABASE_URI=URL(**config.DATABASE))
 data_base = SQLAlchemy(flask_app)
+auth = HTTPBasicAuth()
 

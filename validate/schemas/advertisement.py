@@ -17,7 +17,7 @@ ADVT_SCHEMA = {
 
 ADVT_CREATE = {
     **ADVT_SCHEMA,
-    "required": ["owner_id", "title", "text"]
+    "required": ["title", "text"]
 }
 
 ADVT_UPDATE = {
